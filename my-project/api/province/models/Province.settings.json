@@ -1,0 +1,25 @@
+{
+  "connection": "default",
+  "collectionName": "provinces",
+  "info": {
+    "name": "province",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": [
+      "created_at",
+      "updated_at"
+    ],
+    "comment": ""
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "announcementposts": {
+      "collection": "announcementpost",
+      "via": "province"
+    }
+  }
+}
