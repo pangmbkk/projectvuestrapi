@@ -34,6 +34,16 @@
     "province": {
       "model": "province",
       "via": "announcementposts"
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload"
+    },
+    "user": {
+      "model": "user",
+      "via": "announcementposts",
+      "plugin": "users-permissions"
     }
   }
 }
