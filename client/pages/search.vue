@@ -1,149 +1,96 @@
 <template>
-    <div> 
-     
-        <div class="container-fluid row bodynon">
-          
-            <div class="container">
-                <br>
-                <div class="form-group  row"> <!-- ฟอรม เลือก จังหวัด-->
-                    <div class="col-1"></div>
+  <div class="bodynon">
+    <div class="container-fluid row">
+      <div class="container">
+        <br />
+        <form @submit.prevent="onSearch()">
+          <div class="form-group row">
+            <!-- ฟอรม เลือก จังหวัด-->
+            <div class="col-1"></div>
 
-                    <div class="col-4">
-                        <select class="form-control form-control-sm">
-                            <option selected >--เลือกจังหวัดของคุณ--</option>
-                            <option v-for="province in provinces" :key="province.id">{{province.name}}</option>
-                           
-                        </select>
-
-                    </div>
-                    <div class="col-4">
-                        <select class="form-control form-control-sm">
-                            <option selected >--เลือกวิชา--</option>
-                            <option v-for="subjectname in subjectnames" :key="subjectname.id">{{subjectname.name}}</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-primary btn-sm col" type="submit">ค้นหา</button>
-                    <div class="col-1"></div>
-                           
-                </div><!-- จบform -->
-                <div class="form-group row">
-                    <div class="col-1"></div>
-
-                    <div class="col-4 ">
-                        <select class="form-control form-control-sm">
-                            <option selected >--ระดับชั้น--</option>
-                            <option v-for="educationlevel in educationlevels " :key="educationlevel.id">{{educationlevel.name}}</option>
-                        </select>
-
-                    </div>
-                    <div class="col-4">
-                        <select class="form-control form-control-sm">
-                            <option selected >--เลือกประสบการณ์ผู้สอน--</option>
-                            <option>ยังไม่มี</option>
-                            <option>2 เดือน</option>
-                            <option>5 เดือน</option>
-                        </select>
-                    </div>
-                   
-                    <div class="col"></div>
-
-                </div>
-            </div><!--จบcontainer -->
-
-        </div><!--จบcontainer-fluid -->
-
-        <div class="container-fluid body">
-         
-
-            <div class="container">
-
-                <br>
-                <div class="row">
-                    <div class="col-9">
-                        <div >
-                            <div v-for="info in infos" :key="info.id"    >   
-                                <hr>
-                                <router-link to="/" tag="a" class="router" >  
-                                <div class="row pointer"  >
-                                    
-                                                  
-                                    <div class="col-3 "  >
-                                            <img class="card-img-left img-fluid" :src="'http://localhost:1337' + info.image.url"  alt="">
-                                                                             
-                                        
-                                    </div>
-
-                                    <div class="col">
-                                        <h4 class="title"> {{info.name}}   </h4>
-                                        <br>
-                                        <p>
-                                            {{info.description}}
-                                        </p>
-                                    </div>
-
-                                    <div class="col-2">
-                                        <h4>ประกาศของ</h4>
-                                        <p class="card-text"   >
-                                           {{ info.user.username ||'No description provided' }}
-                                        </p>
-                                    </div>
-                                     
-                                </div> 
-                                </router-link> 
-                            </div>
-                        </div>
-    
-
-                    </div>
-
-                    <div class="col-3">
-                        
-                        <hr>
-                        <ul class="list-group ">
-                            <li class="list-group-item texbox ">
-                                <h5>วิธีการใช้งานเว็บไซต์</h5>
-                                <p>-------------------------------------------</p>
-                                
-                            </li>
-                            
-                        </ul>
-                        <br>
-                        <ul class="list-group ">
-                            <li class="list-group-item texbox ">
-                                <h5>วิธีการใช้งานเว็บไซต์</h5>
-                                <p>-------------------------------------------</p>
-                                
-                            </li>
-                            
-                        </ul>
-                            
-
-
-                    </div>
-
-                </div>
-                
+            <div class="col-4">
+              <b-form-select v-model="province"  size="sm" >
+                <option :value="null">--เลือกจังหวัดของคุณ--</option>
+                <option v-for="province in provinces" :key="province.id" :value="province.name">{{province.name}}</option>
+              </b-form-select>
             </div>
-                
-                
-        </div>
-       
-       
+            <div class="col-4">
+              <b-form-select v-model="subjectname"  size="sm" >
+                <option :value="null">--เลือกวิชา--</option>
+                <option v-for="subjectname in subjectnames" :key="subjectname.id" :value="subjectnames.name">{{subjectname.name}}</option>
+              </b-form-select>
+            </div>
+          </div>
+          <!-- จบform -->
+          <div class="form-group row">
+            <div class="col-1"></div>
 
+            <div class="col-4">
+              <b-form-select v-model="educationlevel"  size="sm" >
+                <option :value="null">--ระดับชั้น--</option>
+                <option v-for="educationlevel in educationlevels" :key="educationlevel.id" :value="educationlevel.name">{{educationlevel.name}}</option>
+              </b-form-select>
+            </div>
+            <div class="col-4">
+              <b-form-select v-model="subjectname"  size="sm" >
+                <option :value="null">--เลือกประสบการณ์ผู้สอน--</option>
+                <option v-for="subjectname in subjectnames" :key="subjectname.id" :value="subjectnames.name">{{subjectname.name}}</option>
+              </b-form-select>
+            </div>
+
+            <button class="btn btn-primary btn-sm col" type="submit">ค้นหา</button>
+          </div>
+        </form>
+      </div>
+      <!--จบcontainer -->
     </div>
+    <!--จบcontainer-fluid -->
 
-       
+    <div class="container-fluid body">
+      <div class="container">
+        <br />
+        <div class="row">
+          <div class="col-md-9">
+            <div>
+              <Listsearch
+                class="router"
+                v-for="listsearch in listsearchs"
+                :key="listsearch.id"
+                :id="listsearch.id"
+                :listsearch="listsearch"
+              />
+            </div>
+          </div>
 
-   
+          <div class="col-md-3">
+            <hr />
+            <ul class="list-group">
+              <li class="list-group-item texbox">
+                <h5>วิธีการใช้งานเว็บไซต์</h5>
+                <p>-------------------------------------------</p>
+              </li>
+            </ul>
+            <br />
+            <ul class="list-group">
+              <li class="list-group-item texbox">
+                <h5>วิธีการใช้งานเว็บไซต์</h5>
+                <p>-------------------------------------------</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 <style scoped>
-.router{
-    text-decoration:none;
-    color: black;
+.router {
+  text-decoration: none;
+  color: black;
 }
 
-.bodynon{
-    background-color:  #2C3E50 !important; 
+.bodynon {
+  background-color: #2c3e50 !important;
 }
 .texbox {
   background-color: none;
@@ -151,74 +98,77 @@
 .body {
   background-color: white;
 }
-img{
-   margin-bottom: 5px;
-   margin-top: 5px;
-   border: 0;
-   width: 50;
-   max-width: 100%;
-   height: auto;
+img {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  border: 0;
+  width: 50;
+  max-width: 100%;
+  height: auto;
 }
-.pointer{
-    cursor: pointer;
+.pointer {
+  cursor: pointer;
 }
-
 </style>
 
 <script>
 // @ is an alias to /src
-import Strapi from 'strapi-sdk-javascript/build/main'
-const apiUrl = process.env.API_URL || 'http://localhost:1337'
-const strapi = new Strapi(apiUrl)
-const axios = require('axios');
+import Strapi from "strapi-sdk-javascript/build/main";
+import axios from "axios";
+const apiUrl = process.env.API_URL || "http://localhost:1337";
+const strapi = new Strapi(apiUrl);
+import Listsearch from "../components/Listsearch";
 
 export default {
-    data() {
-    return {
-        infos:[],
-        info:{
-                id:'0',
-                name:'',
-                description:''
-            
-            },
-       provinces:[],
-       subjectnames:[],
-       educationlevels:[]
-    }
+  components: {
+    Listsearch
   },
 
-    methods:{
-    
-        async getData(){
-            axios
-                .get('http://localhost:1337/announcementposts')
-                .then(response => {
-                    this.infos = response.data ;
-                    console.log('get Announcementposts success')
-                });
-            axios.get('http://localhost:1337/provinces').then(res=>{
-                this.provinces = res.data
-                console.log('get provinces success')
-            })
-            axios.get('http://localhost:1337/subjectnames').then(res=>{
-                this.subjectnames = res.data
-                console.log('get subjectnames success')
-            })
-            axios.get('http://localhost:1337/educationlevels ').then(res=>{
-                this.educationlevels = res.data
-                console.log('get educationlevels success')
-            })
-            
+  data() {
+    return {
+      listsearchs: [],
+      infos: [],
+      info: {
+        id: "0",
+        name: "",
+        description: ""
       },
-    },
-    mounted(){
-        this.getData();
-        
-        
-
+      provinces: [],
+      province: null,
+      subjectnames: [],
+      subjectname: null,
+      educationlevels: [],
+      educationlevel: null
+    };
+  },
+  async created() {
+    axios.get("http://localhost:1337/announcementposts").then(response => {
+      this.listsearchs = response.data;
+      console.log("get Announcementposts success");
+    });
+    axios.get("http://localhost:1337/provinces").then(res => {
+      this.provinces = res.data;
+      console.log("get provinces success");
+    });
+    axios.get("http://localhost:1337/subjectnames").then(res => {
+      this.subjectnames = res.data;
+      console.log("get subjectnames success");
+    });
+    axios.get("http://localhost:1337/educationlevels ").then(res => {
+      this.educationlevels = res.data;
+      console.log("get educationlevels success");
+    });
+  },
+  methods: {
+    async onSearch() {
+      axios
+        .get("http://localhost:1337/announcementposts?province.name="+this.province)
+        .then(response => {
+          this.listsearchs = response.data;
+          console.log("onSearch success   "+ this.province);
+        });
     }
-    
-
-}
+  },
+  mounted() {}
+};
 </script>
